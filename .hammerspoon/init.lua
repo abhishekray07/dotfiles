@@ -120,11 +120,10 @@ hs.hotkey.bind(hyper, "2",function() MoveWindowToSpace(2) end)
 hs.hotkey.bind(hyper, "3",function() MoveWindowToSpace(3) end)
 hs.hotkey.bind(hyper, "4",function() MoveWindowToSpace(4) end)
 
-hs.hotkey.bind(hyper_shift, "1",function() ChangeToSpace(1) end)
-hs.hotkey.bind(hyper_shift, "2",function() ChangeToSpace(2) end)
-hs.hotkey.bind(hyper_shift, "3",function() ChangeToSpace(3) end)
-hs.hotkey.bind(hyper_shift, "4",function() ChangeToSpace(4) end)
-
+hs.hotkey.bind(hyper, "pad1",function() ChangeToSpace(1) end)
+hs.hotkey.bind(hyper, "pad2",function() ChangeToSpace(2) end)
+hs.hotkey.bind(hyper, "pad3",function() ChangeToSpace(3) end)
+hs.hotkey.bind(hyper, "pad4",function() ChangeToSpace(4) end)
 
 hs.hotkey.bindSpec({hyper, "y" }, hs.toggleConsole)
 hs.hotkey.bindSpec({hyper, "r" }, hs.reload)
