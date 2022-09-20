@@ -1,4 +1,4 @@
-spaces = require("hs._asm.undocumented.spaces")
+spaces = require("hs.spaces")
 
 ----------------
 -- Configuration
@@ -14,6 +14,7 @@ hs.window.animationDuration = 0
 
 local hyper = {"cmd", "ctrl", "alt"}
 local hyper_shift = {"cmd", "alt", "shift"}
+local hyper_third = {"cmd", "ctrl"}
 
 function moveLeftHalf()
     local win = hs.window.focusedWindow()
@@ -26,7 +27,31 @@ function moveLeftHalf()
     f.h = max.h
     win:setFrame(f)
 end
-  
+
+function moveLeftTwoThird()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+    f.x = max.x
+    f.y = max.y
+    f.w = max.w * 2 / 3
+    f.h = max.h
+    win:setFrame(f)
+end
+
+function moveLeftThird()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+    f.x = max.x
+    f.y = max.y
+    f.w = max.w / 3
+    f.h = max.h
+    win:setFrame(f)
+end
+
 function moveRightHalf()
     local win = hs.window.focusedWindow()
     local f = win:frame()
@@ -35,6 +60,30 @@ function moveRightHalf()
     f.x = max.x + (max.w / 2)
     f.y = max.y
     f.w = max.w / 2
+    f.h = max.h
+    win:setFrame(f)
+end
+
+function moveRightThird()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+    f.x = max.x + (max.w * 2 / 3)
+    f.y = max.y
+    f.w = max.w / 3
+    f.h = max.h
+    win:setFrame(f)
+end
+
+function moveCenterThird()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+    f.x = max.x + (max.w / 3)
+    f.y = max.y
+    f.w = max.w / 3
     f.h = max.h
     win:setFrame(f)
 end
@@ -86,18 +135,23 @@ function maximize()
     f.h = max.h
     win:setFrame(f)
 end
-  
+
 function moveToScreen(screenPos)
     window = hs.window.focusedWindow()
     screen = hs.screen.find({x=screenPos, y=0})
     window:moveToScreen(screen)
 end
-  
+
 hs.hotkey.bind(hyper, "Left", moveLeftHalf)
 hs.hotkey.bind(hyper, "Right", moveRightHalf)
 hs.hotkey.bind(hyper, "Up", moveTopHalf)
 hs.hotkey.bind(hyper, "Down", moveBottomHalf)
 hs.hotkey.bind(hyper, "M", maximize)
+
+hs.hotkey.bind(hyper_third, "Left", moveLeftTwoThird)
+hs.hotkey.bind(hyper_third, "Right", moveRightThird)
+hs.hotkey.bind(hyper_third, "Down", moveCenterThird)
+hs.hotkey.bind(hyper_third, "Up", moveLeftThird)
 
 function MoveWindowToSpace(sp)
     local win = hs.window.focusedWindow()      -- current window
